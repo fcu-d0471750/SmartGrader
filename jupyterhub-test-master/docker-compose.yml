@@ -1,0 +1,22 @@
+version: '3'
+services:
+    jupyterhub:
+        build:
+          context: './build'
+          dockerfile: Dockerfile
+        image: jupyterhub:1.0.0-custom
+        ports:
+            - ${HUB_PORT}:8000
+        container_name: jupyterhub
+        restart: always
+        volumes:
+            - './${SHARE_FOLDER}:/home'
+            - './config_folder:/srv/jupyterhub'
+            - './exchange:/srv/nbgrader/exchange'
+        env_file: .env
+        environment:
+            - TZ=Asia/Taipei
+        
+
+
+
